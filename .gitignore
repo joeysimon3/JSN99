@@ -1,0 +1,14 @@
+# Rust build artifacts
+/rust/target/
+
+# Build script outputs
+**/*.rs.bk
+**/*.rs.bk.*
+
+# Dependency artifacts (if generated locally)
+/rust/Cargo.lock
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp

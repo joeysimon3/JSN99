@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 #[tokio::main]
 async fn main() -> web3::Result<()> {
-    let ws = WebSocket::new("wss://mainnet.infura.io/ws/v3/1c9cc9b8f6854f7cb55e578fff64f189").await?;
+    let ws = WebSocket::new("ws://127.0.0.1:8546").await?;
     let web3 = Web3::new(ws);
 
     let mut sub = web3.eth_subscribe().subscribe_new_pending_transactions().await?;
@@ -21,6 +21,7 @@ async fn main() -> web3::Result<()> {
 }
 
 async fn handle_pending_transaction(web3: &Web3<WebSocket>, tx_hash: H256) -> web3::Result<()> {
+    println!("{:?}", tx_hash);
     if let Some(tx) = web3.eth().transaction(tx_hash.into()).await? {
         // No need for Option checking on `input` since it's `Bytes`
         let input = &tx.input;
